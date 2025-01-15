@@ -1,24 +1,13 @@
 Dependecies:  
 docker  
 defectdojo image  
+jsonq golang package (github.com/jmoiron/jsonq)  
   
+Use from terminal with flags:  
+-t Authorization token  
+-i IP address (Defaults to localhost)  
+-p Port (Defaults to 8080)  
   
-TODO:  
-	Finish enrich.go script:  
-		Query EPSS data  
-		Query all findings from defectdojo through API  
-		Enrich all possible findings with EPSS data  
-  
-	Make an enrich.go container:  
-		Runs enrich.go script  
-		Waits for x hours / 1 day?  
-		Create helm chart for easy deployment  
-		Enrich container gets access token from DefectDojo container on startup  
-  
-	Backup mechanism:  
-		Backup database every day  
-  
-	Testing:  
-		Create test env with easy deployment  
-		Create tests for enrich.go  
-		
+The script will get all the active findings from DefectDojo, get the latest EPSS data  
+and update epss_score and epss_percentile fields based on CVE numbers.  
+It then sends patch requests through the DefectDojo API.  
